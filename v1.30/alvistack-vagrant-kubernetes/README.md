@@ -1,4 +1,4 @@
-# AlviStack - Ansible Collection for Kubernetes
+# AlviStack - Vagrant Box Packaging for Kubernetes
 
 For running k8s conformance test we need 2 vagrant instances as master
 and 1 vagrant instance as node with following minimal system
@@ -70,13 +70,13 @@ Install Molecule:
     apt update
     apt install -y python3-molecule python3-molecule-plugins
 
-GIT clone Ansible Collection for Kubernetes
-(<https://github.com/alvistack/ansible-collection-kubernetes>):
+GIT clone Vagrant Box Packaging for Kubernetes
+(<https://github.com/alvistack/vagrant-kubernetes>):
 
-    mkdir -p /opt/ansible-collection-kubernetes
-    cd /opt/ansible-collection-kubernetes
+    mkdir -p /opt/vagrant-kubernetes
+    cd /opt/vagrant-kubernetes
     git init
-    git remote add upstream https://github.com/alvistack/ansible-collection-kubernetes.git
+    git remote add upstream https://github.com/alvistack/vagrant-kubernetes.git
     git fetch --all --prune
     git checkout upstream/develop -- .
     git submodule sync --recursive
@@ -86,23 +86,23 @@ GIT clone Ansible Collection for Kubernetes
 
 Deploy kubernetes:
 
-    cd /opt/ansible-collection-kubernetes
+    cd /opt/vagrant-kubernetes
     export _MOLECULE_INSTANCE_NAME="$(pwgen -1AB 12)"
-    molecule converge -s ubuntu-22.04-libvirt -- -e 'kube_release=1.29'
-    molecule verify -s ubuntu-22.04-libvirt
+    molecule converge -s kubernetes-1.30-libvirt -- -e 'kube_release=1.30'
+    molecule verify -s kubernetes-1.30-libvirt
 
 All instances could be SSH and switch as root with `sudo su -`, e.g.
 
-    cd /opt/ansible-collection-kubernetes
-    molecule login -s ubuntu-22.04-libvirt -h $_MOLECULE_INSTANCE_NAME-1
+    cd /opt/vagrant-kubernetes
+    molecule login -s kubernetes-1.30-libvirt -h $_MOLECULE_INSTANCE_NAME-1
 
 Check result:
 
     root@kube01:~# kubectl get node
     NAME     STATUS   ROLES           AGE    VERSION
-    kube01   Ready    control-plane   179m   v1.29.4
-    kube02   Ready    control-plane   178m   v1.29.4
-    kube03   Ready    <none>          178m   v1.29.4
+    kube01   Ready    control-plane   179m   v1.30.0
+    kube02   Ready    control-plane   178m   v1.30.0
+    kube03   Ready    <none>          178m   v1.30.0
 
     root@kube01:~# kubectl get pod --all-namespaces
     NAMESPACE     NAME                             READY   STATUS    RESTARTS   AGE
