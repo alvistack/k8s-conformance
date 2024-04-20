@@ -7,27 +7,27 @@ requirement, e.g.
 -   host
     -   libvirt
     -   nested virtualization enabled
-    -   Ubuntu 22.04
+    -   Ubuntu 24.04
     -   8 CPUs
     -   32GB RAM
 -   `kube01`
     -   kubernetes master, etcd
     -   cri-o, flannel
-    -   Ubuntu 22.04
+    -   Ubuntu 24.04
     -   IP: 192.168.121.101/24
     -   2 CPUs
     -   8GB RAM
 -   `kube02`
     -   kubernetes master, etcd
     -   cri-o, flannel
-    -   Ubuntu 22.04
+    -   Ubuntu 24.04
     -   IP: 192.168.121.102/24
     -   2 CPUs
     -   8GB RAM
 -   `kube03`
     -   kubernetes node, etcd
     -   cri-o, flannel
-    -   Ubuntu 22.04
+    -   Ubuntu 24.04
     -   IP: 192.168.121.103/24
     -   2 CPUs
     -   8GB RAM
@@ -38,7 +38,7 @@ Install some basic pacakges for host:
 
     apt update
     apt full-upgrade
-    apt install -y aptitude git linux-generic-hwe-22.04 openssh-server python3 pwgen rsync vim
+    apt install -y aptitude git linux-generic-hwe-24.04 openssh-server python3 pwgen rsync vim
 
 Install Libvirt:
 
@@ -58,15 +58,15 @@ Install Vagrant:
 Install Ansible (see
 <https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack>):
 
-    echo "deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
-    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    echo "deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
     apt update
     apt install -y ansible python3-ansible-lint python3-docker python3-netaddr python3-vagrant
 
 Install Molecule:
 
-    echo "deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
-    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    echo "deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
     apt update
     apt install -y python3-molecule python3-molecule-plugins
 
@@ -88,13 +88,13 @@ Deploy kubernetes:
 
     cd /opt/ansible-collection-kubernetes
     export _MOLECULE_INSTANCE_NAME="$(pwgen -1AB 12)"
-    molecule converge -s ubuntu-22.04-libvirt -- -e 'kube_release=1.29'
-    molecule verify -s ubuntu-22.04-libvirt
+    molecule converge -s ubuntu-24.04-libvirt -- -e 'kube_release=1.29'
+    molecule verify -s ubuntu-24.04-libvirt
 
 All instances could be SSH and switch as root with `sudo su -`, e.g.
 
     cd /opt/ansible-collection-kubernetes
-    molecule login -s ubuntu-22.04-libvirt -h $_MOLECULE_INSTANCE_NAME-1
+    molecule login -s ubuntu-24.04-libvirt -h $_MOLECULE_INSTANCE_NAME-1
 
 Check result:
 
