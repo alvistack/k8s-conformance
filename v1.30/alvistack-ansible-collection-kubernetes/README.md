@@ -47,10 +47,10 @@ Install Libvirt:
 
 Install Vagrant:
 
-    echo "deb [arch=amd64] https://apt.releases.hashicorp.com jammy main" | tee /etc/apt/sources.list.d/hashicorp.list
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /etc/apt/trusted.gpg.d/hashicorp.gpg > /dev/null
-    apt update
-    apt install -y vagrant
+    echo "deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    apt-get update
+    apt-get install -y vagrant
     vagrant plugin install vagrant-libvirt
 
 ## Bootstrap Ansible
@@ -58,17 +58,17 @@ Install Vagrant:
 Install Ansible (see
 <https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack>):
 
-    echo "deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
-    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
-    apt update
-    apt install -y ansible python3-ansible-lint python3-docker python3-netaddr python3-vagrant
+    echo "deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    apt-get update
+    apt-get install -y ansible ansible-lint python3-docker python3-netaddr python3-vagrant
 
 Install Molecule:
 
-    echo "deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
-    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
-    apt update
-    apt install -y python3-molecule python3-molecule-plugins
+    echo "deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /" | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    apt-get update
+    apt-get install -y python3-molecule python3-molecule-plugins
 
 GIT clone Ansible Collection for Kubernetes
 (<https://github.com/alvistack/ansible-collection-kubernetes>):
